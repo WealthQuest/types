@@ -1,0 +1,85 @@
+syntax = "proto3";
+package WealthQuest.Types;
+option go_package = "github.com/WealthQuest/types;types";
+
+// K线
+message Candle
+{
+    // 时间
+    int64 time = 1;
+    // 开盘价
+    double open = 2;
+    // 收盘价
+    double close = 3;
+    // 最高价
+    double high = 4;
+    // 最低价
+    double low = 5;
+    // 成交量
+    double volume = 6;
+    // 主动成交量
+    double active_volume = 8;
+    // 成交额
+    double amount = 7;
+    // 主动成交额
+    double active_amount = 9;
+    // 成交笔数
+    int64 trade_num = 10;
+    // 是否完结
+    bool finished = 11;
+}
+
+
+// 归集交易
+message AggTrade
+{
+    // 时间
+    int64 time = 1;
+    // 序号
+    int64 seq = 2;
+    // 价格
+    double price = 3;
+    // 数量
+    double volume = 4;
+    // 买方是否为挂单
+    bool maker = 5;
+}
+
+
+// 标记价格
+message MarkPrice
+{
+    // 时间
+    int64 time = 1;
+    // 标记价格
+    double mark_price = 2;
+    // 指数价格
+    double index_price = 3;
+    // 预估结算价格, 仅在结算前最后一小时有参考价值
+    double estimated_settle_price = 4;
+    // 资金费率
+    double funding_rate = 5;
+    // 下一个资金费率时间
+    int64 next_funding_time = 6;
+}
+
+
+// 深度信息
+message Depth
+{
+    // 时间
+    int64 time = 1;
+    // 买档位
+    repeated DepthLevel buys = 2;
+    // 卖档位
+    repeated DepthLevel sells = 3;
+}
+
+// 深度信息档位
+message DepthLevel
+{
+    // 价格
+    double price = 1;
+    // 数量
+    double volume = 2;
+}
