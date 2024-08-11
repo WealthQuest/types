@@ -16,20 +16,6 @@ func (v RunMode) Valid() bool {
 	return v >= BACKTEST && v <= REAL
 }
 
-// 交易品种
-type TradeKind int32
-
-const (
-	// 现货
-	SPOT TradeKind = iota
-	// 永续合约
-	FUTURES
-)
-
-func (v TradeKind) Valid() bool {
-	return v >= SPOT && v <= FUTURES
-}
-
 // 交易类型
 type TradeType int32
 
@@ -38,36 +24,32 @@ const (
 	LIMIT TradeType = iota
 	// 市价交易
 	MARKET
+	// 止损单
+	STOP
+	// 价单止损市
+	STOP_MARKET
+	// 止盈单
+	TAKE_PROFIT
+	// 市价止盈单
+	TAKE_PROFIT_MARKET
+	// 跟踪止损市价单
+	TRAILING_STOP_MARKET
 )
 
 func (v TradeType) Valid() bool {
-	return v >= LIMIT && v <= MARKET
+	return v >= LIMIT && v <= TRAILING_STOP_MARKET
 }
 
-// 交易方式
+// 交易方向
 type TradeSide int32
 
 const (
 	// 做多
-	LONG TradeSide = iota
-	// 做空格
-	SHORT
-)
-
-func (v TradeSide) Valid() bool {
-	return v >= LONG && v <= SHORT
-}
-
-// 交易动作
-type TradeAction int32
-
-const (
-	// 买入
-	BUY TradeAction = iota
-	// 卖出
+	BUY TradeSide = iota
+	// 做空
 	SELL
 )
 
-func (v TradeAction) Valid() bool {
+func (v TradeSide) Valid() bool {
 	return v >= BUY && v <= SELL
 }
